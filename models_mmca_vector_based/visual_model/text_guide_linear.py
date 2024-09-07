@@ -2,7 +2,7 @@ import torch
 import torch.nn.functional as F
 from torch import nn, Tensor
 
-class Text_guide_linear(nn.Module):
+class MM_adaption_linear(nn.Module):
     def __init__(self, d_model=256, d_model_visual=256, down_rate=4):
         super().__init__()
         self.visual_linear_static_down = nn.Linear(d_model_visual, d_model // down_rate, bias=False)
@@ -21,7 +21,7 @@ class Text_guide_linear(nn.Module):
         x_t = self.visual_linear_static_up(x_t)
         return x_t
 
-class Text_guide_conv_2d(nn.Module):
+class MM_adaption_conv_2d(nn.Module):
     def __init__(self, d_model=256, d_model_visual=256, down_rate=4):
         super().__init__()
         self.visual_conv_static_down = nn.Conv2d(d_model_visual, d_model // down_rate, 3, 1, 1)

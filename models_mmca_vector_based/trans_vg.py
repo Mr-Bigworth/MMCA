@@ -26,14 +26,9 @@ class TransVG(nn.Module):
 
         self.visu_proj = nn.Linear(self.visumodel.num_channels, hidden_dim)
         self.text_proj = nn.Linear(self.textmodel.num_channels, hidden_dim)
-        # self.text_proj = nn.Linear(768, hidden_dim)
 
         self.vl_transformer = build_vl_transformer(args)
         self.bbox_embed = MLP(hidden_dim, hidden_dim, 4, 3)
-
-        # self.text_query_embed = nn.Embedding(1, 256)
-        # self.text_embed_attn = nn.MultiheadAttention(hidden_dim, num_heads=8, dropout=0.1)
-
 
     def forward(self, img_data, text_data):
         bs = img_data.tensors.shape[0]
@@ -49,11 +44,6 @@ class TransVG(nn.Module):
         # permute BxLenxC to LenxBxC
         text_src = text_src.permute(1, 0, 2)
         text_mask = text_mask.flatten(1)
-        # word_feat_embed LxBxC
-        # word_feat_embed = self.text_embed_attn(self.text_query_embed.weight.unsqueeze(1).repeat(1, bs, 1),
-        #                                        text_src, text_src,
-        #                                        key_padding_mask=text_mask)[0]
-        # word_feat_embed = F.max_pool1d(text_src.transpose(0, 2), 20).transpose(0, 2)
         # visual backbone
         visu_mask, visu_src = self.visumodel(img_data, word_feat_embed)
         visu_src = self.visu_proj(visu_src) # (N*B)xC

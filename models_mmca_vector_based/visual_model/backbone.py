@@ -14,7 +14,7 @@ from typing import Dict, List
 from utils.misc import NestedTensor, is_main_process
 
 from .position_encoding import build_position_encoding
-from .text_guide_linear import Text_guide_conv_2d
+from .text_guide_linear import MM_adaption_conv_2d
 
 
 class FrozenBatchNorm2d(torch.nn.Module):
@@ -74,7 +74,7 @@ class BackboneBase(nn.Module):
         self.multimodal_layers_d_model = [512, 1024, 2048]
         self.multimodal_layers = nn.ModuleList()
         for i in range(len(self.multimodal_layers_index)):
-            self.multimodal_layers.append(Text_guide_conv_2d(256, self.multimodal_layers_d_model[i], down_rate=4))
+            self.multimodal_layers.append(MM_adaption_conv_2d(256, self.multimodal_layers_d_model[i], down_rate=4))
 
     def forward(self, tensor_list: NestedTensor, word_feat_embed):
         # xs = self.body(tensor_list.tensors)

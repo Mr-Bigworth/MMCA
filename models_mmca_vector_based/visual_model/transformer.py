@@ -13,7 +13,7 @@ from typing import Optional, List
 import torch
 import torch.nn.functional as F
 from torch import nn, Tensor
-from .text_guide_linear import Text_guide_linear
+from .text_guide_linear import MM_adaption_linear
 
 
 class Transformer(nn.Module):
@@ -267,8 +267,8 @@ class TransformerEncoderLayer_MM(nn.Module):
         self.activation = _get_activation_fn(activation)
         self.normalize_before = normalize_before
 
-        self.text_linear_q = Text_guide_linear(d_model, d_model, down_rate=4)
-        self.text_linear_k = Text_guide_linear(d_model, d_model, down_rate=4)
+        self.text_linear_q = MM_adaption_linear(d_model, d_model, down_rate=4)
+        self.text_linear_k = MM_adaption_linear(d_model, d_model, down_rate=4)
 
 
     def with_pos_embed(self, tensor, pos: Optional[Tensor]):
