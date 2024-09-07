@@ -14,7 +14,7 @@ from torch.utils.data import DataLoader, DistributedSampler
 
 import datasets
 import utils.misc as utils
-from models import build_model
+from models_mmca_vector_based import build_model
 from datasets import build_dataset
 from engine import train_one_epoch, validate
 
