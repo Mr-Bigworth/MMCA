@@ -11,10 +11,6 @@ by Ruilin Yao, Shengwu Xiong, Yichen Zhao, Yi Rong*
 
 Please refer to [GETTING_STARGTED.md](docs/GETTING_STARTED.md) to learn how to prepare the datasets and pretrained checkpoints.
 
-### Model Zoo
-
-The models with ResNet-50 backbone and ResNet-101 backbone are available in [[Gdrive]](https://drive.google.com/drive/folders/17CVnc5XOyqqDlg1veXRE9hY9r123Nvqx?usp=sharing)
-
 ### Training and Evaluation
 
 1.  Training
